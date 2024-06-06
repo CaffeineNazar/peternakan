@@ -146,47 +146,85 @@ public class dataBase {
     
     /* TERNAK */
     public void simpanTernak(int id_ternak, int id_peternak, String jenis_ternak, String jantan_betina, String umur, String jml_beranak, String warna_bulu, String bulu_benang_lampe, String tanduk, String telinga_kiri, String telinga_kanan, String telinga_istimewa, String tata, String unyung,
-    String gigir, String badan_bagKiri, String badan_bagKanan, String dada, String raja_ono, String bedis_kiri, String bedis_kanan, String buta_ate, String pakepit, String telutuk, String punggung, int status, String status_mutasi, Date date_created){
+    String gigi, String badan_bagKiri, String badan_bagKanan, String dada, String raja_ono, String bedis_kiri, String bedis_kanan, String buta_ate, String pakepit, String telutuk, String punggung, int status, String status_mutasi, Date date_created){
         try{
-        String sql = "insert into ternak (id_ternak, id_peternak, jenis_ternak, jenis_betina, umur, jml_beternak, warna_bulu, bulu_benang_lampe, tanduk, telinga_kiri, telinga_kanan, telinga_istimewa, tata, unyung, gigir, badan_bagKiri, badan_bagKanan, dada, raja_ono, bedis_kiri, bedis_kanan, "
-                + "buta_ate, pakepit, telutuk, punggung, status, status_mutasi, date_created) value(,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,"
+        String sql = "insert into ternak (id_ternak, id_peternak, jenis_ternak, jenis_betina, umur, jml_beternak, warna_bulu, bulu_benang_lampe, tanduk, telinga_kiri, telinga_kanan, telinga_istimewa, tata, unyung, gigi, badan_bagKiri, badan_bagKanan, dada, raja_ono, bedis_kiri, bedis_kanan, "
+                + "buta_ate, pakepit, telutuk, punggung, status, status_mutasi, date_created) value(,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?"
                 + "?,?,?,?,?,?,?,?)";
         PreparedStatement perintah = connectionDB.prepareStatement(sql);
         perintah.setInt(1, id_ternak);
         perintah.setInt(2, id_peternak);
         perintah.setString(3, jenis_ternak);
-        perintah.setString(4, jenis_ternak);
-        perintah.setString(5, jenis_ternak);
-        perintah.setString(6, jenis_ternak);
-        perintah.setString(7, jenis_ternak);
-        perintah.setString(8, jenis_ternak);
-        perintah.setString(9, jenis_ternak);
-        perintah.setString(10, jenis_ternak);
-        perintah.setString(11, jenis_ternak);
-        perintah.setString(12, jenis_ternak);
-        perintah.setString(13, jenis_ternak);
-        perintah.setString(14, jenis_ternak);
-        perintah.setString(15, jenis_ternak);
-        perintah.setString(16, jenis_ternak);
-        perintah.setString(17, jenis_ternak);
-        perintah.setString(18, jenis_ternak);
-        perintah.setString(19, jenis_ternak);
-        perintah.setString(20, jenis_ternak);
-        perintah.setString(21, jenis_ternak);
-        perintah.setString(22, jenis_ternak);
-        perintah.setString(23, jenis_ternak);
-        perintah.setString(24, jenis_ternak);
-        perintah.setString(25, jenis_ternak);
-        perintah.setString(26, jenis_ternak);
-        perintah.setString(27, jenis_ternak);
-        perintah.setString(28, jenis_ternak);
+        perintah.setString(4, jantan_betina);
+        perintah.setString(5, umur);
+        perintah.setString(6, jml_beranak);
+        perintah.setString(7, warna_bulu);
+        perintah.setString(8, bulu_benang_lampe);
+        perintah.setString(9, tanduk);
+        perintah.setString(10, telinga_kiri);
+        perintah.setString(11, telinga_kanan);
+        perintah.setString(12, telinga_istimewa);
+        perintah.setString(13, tata);
+        perintah.setString(14, unyung);
+        perintah.setString(15, gigi);
+        perintah.setString(16, badan_bagKiri);
+        perintah.setString(17, badan_bagKanan);
+        perintah.setString(18, dada);
+        perintah.setString(19, raja_ono);
+        perintah.setString(20, bedis_kiri);
+        perintah.setString(21, bedis_kanan);
+        perintah.setString(22, buta_ate);
+        perintah.setString(23, pakepit);
+        perintah.setString(24, telutuk);
+        perintah.setString(25, punggung);
+        perintah.setInt(26, status);
+        perintah.setString(27, status_mutasi);
+        perintah.setDate(28, date_created);
         perintah.executeUpdate();
         System.out.println("Sistem Berhasil Disimpan");
         }
         catch(Exception e){
             System.out.println(e.getMessage());
         }
-     
+    }
+    
+    public void updateTernak(int id_ternak, int id_peternak, String jenis_ternak, String jantan_betina, String umur, String jml_beranak, String warna_bulu, String bulu_benang_lampe, String tanduk, String telinga_kiri, String telinga_kanan, String telinga_istimewa, String tata, String unyung,
+    String gigi, String badan_bagKiri, String badan_bagKanan, String dada, String raja_ono, String bedis_kiri, String bedis_kanan, String buta_ate, String pakepit, String telutuk, String punggung, int status, String status_mutasi, Date date_created){
+        try{
+            String sql = "update ternak set id_peternak = ?, jenis_ternak = ?, jantan_betina = ?, umur = ?, jml_beternak = ?, warna_bulu = ?, bulu_benang_lampe = ?, tanduk = ?, telinga_kiri = ?, telinga_kanan = ?, telinga_istimewa = ?, tata = ?, unyung = ?, gigi = ?, badan_bagKiri = ?, badan_bagKanan = ?, dada = ?, raja_ono = ?, bedis_kiri = ?, bedis_kanan = ?, buta_ate = ?, pakepit = ?, telutuk = ?, punggung = ?, status = ?, status_mutasi = ?, date_created = ? where id_ternak = ?";
+            PreparedStatement perintah = connectionDB.prepareStatement(sql);
+            perintah.setInt(1, id_peternak);
+            perintah.setString(2, jenis_ternak);
+            perintah.setString(3, jantan_betina);
+            perintah.setString(4, umur);
+            perintah.setString(5, jml_beranak);
+            perintah.setString(6, warna_bulu);
+            perintah.setString(7, bulu_benang_lampe);
+            perintah.setString(8, tanduk);
+            perintah.setString(9, telinga_kiri);
+            perintah.setString(10, telinga_kanan);
+            perintah.setString(11, telinga_istimewa);
+            perintah.setString(12, tata);
+            perintah.setString(13, unyung);
+            perintah.setString(14, gigi);
+            perintah.setString(15, badan_bagKiri);
+            perintah.setString(16, badan_bagKanan);
+            perintah.setString(17, dada);
+            perintah.setString(18, raja_ono);
+            perintah.setString(19, bedis_kiri);
+            perintah.setString(20, bedis_kanan);
+            perintah.setString(21, buta_ate);
+            perintah.setString(22, pakepit);
+            perintah.setString(23, telutuk);
+            perintah.setString(24, punggung);
+            perintah.setInt(25, status);
+            perintah.setString(26, status_mutasi);
+            perintah.setDate(27, date_created);
+            perintah.setInt(28, id_ternak);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
     
     /* TERNAK */

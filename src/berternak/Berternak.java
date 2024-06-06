@@ -25,12 +25,16 @@ public class Berternak {
         Date date_created = Date.valueOf("2020-06-04");
 //        dbConnect.simpanDesa(1, "Panyiuran", "Nazar", "300", date_created);
 //        dbConnect.ubahDesa(1, "Alabio", "Nazarul", "3004", "2024-08-08");
-        dbConnect.hapusDesa(1, "", "", "", "");
+//        dbConnect.hapusDesa(1, "", "", "", "");
         
         /* TABEL PETERNAK */
 //        dbConnect.simpanPeternak(2, 1, "Nazar", "20", "laki-laki", "Mahasiswa", "Alabio", 630803321, "3004", "2024-09-14");
 //        dbConnect.ubahPeternak(2, 1, "Arul", "20", "laki-laki", "Farmer", "Panyiuran", 630803321, "5003", "2024-12-12");
 //        dbConnect.hapusPeternak(2, 0, "", "", "", "", "", 0, "", "");
+
+        /* TABEL TERNAK */
+        Date Ternak = Date.valueOf("2020-12-30");
+        dbConnect.simpanTernak(1, 4, "mamalia", "jantan", "4 tahun", "2", "coklat", "lampe", "sedang", "bersih", "bersih", "tidak ada", "ada", "bagus", "lengkap", "bagus", "bagus", "bagus", "bukan", "bagus", "bagus", "tidak ada", "tidak", "bagus", "bagus", 3, "tidak ada", Ternak);
         
         /* TABEL UPT */
 //        dbConnect.simpanUpt(221001269, "Muhammad-Nazarul-Iman", "123");
