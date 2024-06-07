@@ -32,6 +32,14 @@ public class ternak extends peternak{
         return this.status;
     }
     
+    public void inputIdPeternak(Integer idPeternak){
+        this.idPeternak = idPeternak;
+    }
+    
+    public Integer getIdPeternak(){
+        return this.idPeternak;
+    }
+    
     public void inputJenisTernak(String jenisTernak){
         this.jenisTernak = jenisTernak;
     }

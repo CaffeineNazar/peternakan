@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Date;
+import java.sql.Statement;
+import java.sql.ResultSet;
 
 /**
  *
@@ -78,6 +80,41 @@ public class dataBase {
             System.out.println(e.getMessage());
         }
     }
+    
+    public void dataDesa(){
+        try {
+            Statement stmt = connectionDB.createStatement();
+            ResultSet baris = stmt.executeQuery("select * from desa ORDER BY id_desa ASC");
+            while(baris.next()){
+                System.out.println(baris.getInt("id_desa")+" | "+
+                        baris.getString("nama_desa")+" | "+
+                        baris.getString("username")+" | "+
+                        baris.getString("password")+" | "+
+                        baris.getString("date_created"));
+            }
+        } 
+        catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+    
+    public void cariDesa(Integer paramidDesa){
+        try {
+            String sql = "select * from desa where id_desa = ?";
+            PreparedStatement perintah = connectionDB.prepareStatement(sql);
+            perintah.setInt(1, paramidDesa);
+            ResultSet data = perintah.executeQuery();
+            while(data.next()){
+                System.out.println("id : "+data.getInt("id_desa"));
+                System.out.println("desa "+data.getString("nama_desa"));
+                System.out.println("username : "+data.getString("username"));
+                System.out.println("password : "+data.getString("password"));
+                System.out.println("date created : "+data.getString("date_created"));
+            }
+        } 
+        catch (Exception e) {
+        }
+    }
     /* DESA */
     
     /* PETERNAK */
@@ -142,15 +179,59 @@ public class dataBase {
             System.out.println(e.getMessage());
         }
     }
+    
+    public void dataPeternak(){
+        try {
+          Statement stmt = connectionDB.createStatement();
+          ResultSet baris = stmt.executeQuery("select * from peternak ORDER BY id_peternak ASC");
+          while(baris.next()){
+              System.out.println(baris.getInt("id_peternak") +" | "+
+                      baris.getInt("id_desa")+" | "+
+                      baris.getString("nama")+" | "+
+                      baris.getString("umur_peternak")+" | "+
+                      baris.getString("kelamin")+" | "+
+                      baris.getString("pekerjaan")+" | "+
+                      baris.getString("alamat")+" | "+
+                      baris.getInt("nik")+" | "+
+                      baris.getString("password")+" | "+
+                      baris.getString("date_created"));
+          }
+        } 
+        catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+    
+    public void cariPeternak(Integer paramIdPeternak){
+        try {
+            String sql = "select * from peternak where id_peternak = ?";
+            PreparedStatement perintah = connectionDB.prepareStatement(sql);
+            perintah.setInt(1, paramIdPeternak);
+            ResultSet data = perintah.executeQuery();
+            while (data.next()){
+                System.out.println("id peternak : "+data.getInt("id_peternak"));
+                System.out.println("id_desa : "+data.getInt("id_desa"));
+                System.out.println("nama : "+data.getString("nama"));
+                System.out.println("umur : "+data.getString("umur_peternak"));
+                System.out.println("kelamin : "+data.getString("kelamin"));
+                System.out.println("pekerjaan : "+data.getString("pekerjaan"));
+                System.out.println("alamat : "+data.getString("alamat"));
+                System.out.println("nik : "+data.getInt("nik"));
+                System.out.println("password : "+data.getString("password"));
+                System.out.println("date created : "+data.getString("date_created"));
+            }
+        } 
+        catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
     /* PETERNAK */
     
     /* TERNAK */
     public void simpanTernak(int id_ternak, int id_peternak, String jenis_ternak, String jantan_betina, String umur, String jml_beranak, String warna_bulu, String bulu_benang_lampe, String tanduk, String telinga_kiri, String telinga_kanan, String telinga_istimewa, String tata, String unyung,
     String gigi, String badan_bagKiri, String badan_bagKanan, String dada, String raja_ono, String bedis_kiri, String bedis_kanan, String buta_ate, String pakepit, String telutuk, String punggung, int status, String status_mutasi, Date date_created){
         try{
-        String sql = "insert into ternak (id_ternak, id_peternak, jenis_ternak, jenis_betina, umur, jml_beternak, warna_bulu, bulu_benang_lampe, tanduk, telinga_kiri, telinga_kanan, telinga_istimewa, tata, unyung, gigi, badan_bagKiri, badan_bagKanan, dada, raja_ono, bedis_kiri, bedis_kanan, "
-                + "buta_ate, pakepit, telutuk, punggung, status, status_mutasi, date_created) value(,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?"
-                + "?,?,?,?,?,?,?,?)";
+        String sql = "insert into ternak (id_ternak, id_peternak, jenis_ternak, jantan_betina, umur, jml_beranak, warna_bulu, bulu_benang_lampe, tanduk, telinga_kiri, telinga_kanan, telinga_istimewa, tata, unyung, gigi, badan_bagKiri, badan_bagKanan, dada, raja_ono, bedis_kiri, bedis_kanan, buta_ate, pakepit, telutuk, punggung, status, status_mutasi, date_created) value(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement perintah = connectionDB.prepareStatement(sql);
         perintah.setInt(1, id_ternak);
         perintah.setInt(2, id_peternak);
@@ -221,8 +302,24 @@ public class dataBase {
             perintah.setString(26, status_mutasi);
             perintah.setDate(27, date_created);
             perintah.setInt(28, id_ternak);
+            perintah.executeUpdate();
+            System.out.println("Data Berhasil Diupdate");
         }
         catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void hapusTernak(int id_ternak, int id_peternak, String jenis_ternak, String jantan_betina, String umur, String jml_beranak, String warna_bulu, String bulu_benang_lampe, String tanduk, String telinga_kiri, String telinga_kanan, String telinga_istimewa, String tata, String unyung,
+    String gigi, String badan_bagKiri, String badan_bagKanan, String dada, String raja_ono, String bedis_kiri, String bedis_kanan, String buta_ate, String pakepit, String telutuk, String punggung, int status, String status_mutasi, Date date_created){
+        try {
+            String sql = "delete form ternak where id_ternak = ?";
+            PreparedStatement perintah = connectionDB.prepareStatement(sql);
+            perintah.setInt(1, id_ternak);
+            perintah.executeUpdate();
+            System.out.println("Data Berhasil Dihapus");
+        } 
+        catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
@@ -273,6 +370,38 @@ public class dataBase {
            System.out.println(e.getMessage());
         }
     }
+    
+    public void dataUpt(){
+        try{
+            Statement stmt = connectionDB.createStatement();
+            ResultSet baris = stmt.executeQuery("select * from upt ORDER BY id_upt ASC");
+            while(baris.next()){
+                System.out.println(baris.getInt("id_upt")+" | "+
+                        baris.getString("username")+" | "+
+                        baris.getString("Password"));
+            }
+        }
+        catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+    }
+    
+    public void cariUpt(Integer paramid_upt){ 
+        try{
+            String sql = "Select * from upt where id_upt = ?";
+            PreparedStatement perintah = connectionDB.prepareStatement(sql);
+            perintah.setInt(1, paramid_upt);
+            ResultSet data = perintah.executeQuery();
+            while (data.next()){
+                System.out.println("id upt : "+data.getInt("id_upt"));
+                System.out.println("username : "+data.getString("username"));
+                System.out.println("password : "+data.getString("password"));
+            }
+        }
+        catch(Exception e){
+            System.err.println(e.getMessage());
+        }
+    }
     /* UPT */
     
     /* PL */
@@ -320,6 +449,42 @@ public class dataBase {
         }
         catch(Exception e){
             System.out.println(e.getMessage());
+        }
+    }
+    
+    public void dataPl(){
+        try {
+            Statement stmt = connectionDB.createStatement();
+            ResultSet baris = stmt.executeQuery("select * from pl ORDER BY id_pl ASC");
+            while(baris.next()){
+                System.out.println(baris.getInt("id_pl")+" | "+
+                        baris.getInt("id_upt")+" | "+
+                        baris.getString("nama_pl")+" | "+
+                        baris.getString("username")+" | "+
+                        baris.getString("password"));
+            }
+        } 
+        catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+    
+    public void cariPl(Integer paramidPl){
+        try {
+            String sql = "select * from pl where id_pl = ?";
+            PreparedStatement perintah = connectionDB.prepareStatement(sql);
+            perintah.setInt(1, paramidPl);
+            ResultSet data = perintah.executeQuery();
+            while(data.next()){
+                System.out.println("id pl : "+data.getInt("id_pl"));
+                System.out.println("id upt : "+data.getInt("id_upt"));
+                System.out.println("nama : "+data.getString("nama_pl"));
+                System.out.println("username : "+data.getString("username"));
+                System.out.println("Password : "+data.getString("password"));
+            }
+        } 
+        catch (Exception e) {
+            System.err.println("Data Berhasil Dihapus");
         }
     }
     /* PL */
