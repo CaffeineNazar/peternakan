@@ -15,7 +15,7 @@ import java.sql.ResultSet;
  * @author Hp
  */
 public class dataBase {
-    private String dataBaseName = "muhammadnazaruliman1_2210010269";
+    private String dataBaseName = "2210010269_muhammadnazaruliman";
     private String username = "root";
     private String password = "";
     public static Connection connectionDB;
@@ -51,14 +51,14 @@ public class dataBase {
         }
     }
     
-    public void ubahDesa(Integer id_desa, String nama_desa, String username, String password, String date_created){
+    public void ubahDesa(Integer id_desa, String nama_desa, String username, String password, Date date_created){
         try{
             String sql = "update desa set nama_desa =?, username = ?, password = ?, date_created = ? where id_desa = ?";
             PreparedStatement perintah = connectionDB.prepareStatement(sql);
             perintah.setString(1, nama_desa);
             perintah.setString(2, username);
             perintah.setString(3, password);
-            perintah.setString(4, date_created);
+            perintah.setDate(4, date_created);
             perintah.setInt(5, id_desa);
             perintah.executeUpdate();
             System.out.println("Data Berhasil Diubah");
@@ -68,7 +68,7 @@ public class dataBase {
         }
     }
     
-    public void hapusDesa(Integer id_desa, String nama_desa, String username, String password, String date_created){
+    public void hapusDesa(Integer id_desa){
         try{
             String sql = "delete from desa where id_desa = ?";
             PreparedStatement perintah = connectionDB.prepareStatement(sql);
@@ -166,8 +166,7 @@ public class dataBase {
         }
     }
     
-    public void hapusPeternak(Integer id_peternak, Integer id_desa, String nama, String umur_peternak,String kelamin, 
-            String pekerjaan, String alamat, Integer nik, String password, String date_created){
+    public void hapusPeternak(Integer id_peternak){
         try{
             String sql = ("delete from peternak where id_peternak = ?");
             PreparedStatement perintah = connectionDB.prepareStatement(sql);
@@ -227,104 +226,6 @@ public class dataBase {
     }
     /* PETERNAK */
     
-    /* TERNAK */
-    public void simpanTernak(int id_ternak, int id_peternak, String jenis_ternak, String jantan_betina, String umur, String jml_beranak, String warna_bulu, String bulu_benang_lampe, String tanduk, String telinga_kiri, String telinga_kanan, String telinga_istimewa, String tata, String unyung,
-    String gigi, String badan_bagKiri, String badan_bagKanan, String dada, String raja_ono, String bedis_kiri, String bedis_kanan, String buta_ate, String pakepit, String telutuk, String punggung, int status, String status_mutasi, Date date_created){
-        try{
-        String sql = "insert into ternak (id_ternak, id_peternak, jenis_ternak, jantan_betina, umur, jml_beranak, warna_bulu, bulu_benang_lampe, tanduk, telinga_kiri, telinga_kanan, telinga_istimewa, tata, unyung, gigi, badan_bagKiri, badan_bagKanan, dada, raja_ono, bedis_kiri, bedis_kanan, buta_ate, pakepit, telutuk, punggung, status, status_mutasi, date_created) value(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        PreparedStatement perintah = connectionDB.prepareStatement(sql);
-        perintah.setInt(1, id_ternak);
-        perintah.setInt(2, id_peternak);
-        perintah.setString(3, jenis_ternak);
-        perintah.setString(4, jantan_betina);
-        perintah.setString(5, umur);
-        perintah.setString(6, jml_beranak);
-        perintah.setString(7, warna_bulu);
-        perintah.setString(8, bulu_benang_lampe);
-        perintah.setString(9, tanduk);
-        perintah.setString(10, telinga_kiri);
-        perintah.setString(11, telinga_kanan);
-        perintah.setString(12, telinga_istimewa);
-        perintah.setString(13, tata);
-        perintah.setString(14, unyung);
-        perintah.setString(15, gigi);
-        perintah.setString(16, badan_bagKiri);
-        perintah.setString(17, badan_bagKanan);
-        perintah.setString(18, dada);
-        perintah.setString(19, raja_ono);
-        perintah.setString(20, bedis_kiri);
-        perintah.setString(21, bedis_kanan);
-        perintah.setString(22, buta_ate);
-        perintah.setString(23, pakepit);
-        perintah.setString(24, telutuk);
-        perintah.setString(25, punggung);
-        perintah.setInt(26, status);
-        perintah.setString(27, status_mutasi);
-        perintah.setDate(28, date_created);
-        perintah.executeUpdate();
-        System.out.println("Sistem Berhasil Disimpan");
-        }
-        catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-    }
-    
-    public void updateTernak(int id_ternak, int id_peternak, String jenis_ternak, String jantan_betina, String umur, String jml_beranak, String warna_bulu, String bulu_benang_lampe, String tanduk, String telinga_kiri, String telinga_kanan, String telinga_istimewa, String tata, String unyung,
-    String gigi, String badan_bagKiri, String badan_bagKanan, String dada, String raja_ono, String bedis_kiri, String bedis_kanan, String buta_ate, String pakepit, String telutuk, String punggung, int status, String status_mutasi, Date date_created){
-        try{
-            String sql = "update ternak set id_peternak = ?, jenis_ternak = ?, jantan_betina = ?, umur = ?, jml_beternak = ?, warna_bulu = ?, bulu_benang_lampe = ?, tanduk = ?, telinga_kiri = ?, telinga_kanan = ?, telinga_istimewa = ?, tata = ?, unyung = ?, gigi = ?, badan_bagKiri = ?, badan_bagKanan = ?, dada = ?, raja_ono = ?, bedis_kiri = ?, bedis_kanan = ?, buta_ate = ?, pakepit = ?, telutuk = ?, punggung = ?, status = ?, status_mutasi = ?, date_created = ? where id_ternak = ?";
-            PreparedStatement perintah = connectionDB.prepareStatement(sql);
-            perintah.setInt(1, id_peternak);
-            perintah.setString(2, jenis_ternak);
-            perintah.setString(3, jantan_betina);
-            perintah.setString(4, umur);
-            perintah.setString(5, jml_beranak);
-            perintah.setString(6, warna_bulu);
-            perintah.setString(7, bulu_benang_lampe);
-            perintah.setString(8, tanduk);
-            perintah.setString(9, telinga_kiri);
-            perintah.setString(10, telinga_kanan);
-            perintah.setString(11, telinga_istimewa);
-            perintah.setString(12, tata);
-            perintah.setString(13, unyung);
-            perintah.setString(14, gigi);
-            perintah.setString(15, badan_bagKiri);
-            perintah.setString(16, badan_bagKanan);
-            perintah.setString(17, dada);
-            perintah.setString(18, raja_ono);
-            perintah.setString(19, bedis_kiri);
-            perintah.setString(20, bedis_kanan);
-            perintah.setString(21, buta_ate);
-            perintah.setString(22, pakepit);
-            perintah.setString(23, telutuk);
-            perintah.setString(24, punggung);
-            perintah.setInt(25, status);
-            perintah.setString(26, status_mutasi);
-            perintah.setDate(27, date_created);
-            perintah.setInt(28, id_ternak);
-            perintah.executeUpdate();
-            System.out.println("Data Berhasil Diupdate");
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-        }
-    }
-    
-    public void hapusTernak(int id_ternak, int id_peternak, String jenis_ternak, String jantan_betina, String umur, String jml_beranak, String warna_bulu, String bulu_benang_lampe, String tanduk, String telinga_kiri, String telinga_kanan, String telinga_istimewa, String tata, String unyung,
-    String gigi, String badan_bagKiri, String badan_bagKanan, String dada, String raja_ono, String bedis_kiri, String bedis_kanan, String buta_ate, String pakepit, String telutuk, String punggung, int status, String status_mutasi, Date date_created){
-        try {
-            String sql = "delete form ternak where id_ternak = ?";
-            PreparedStatement perintah = connectionDB.prepareStatement(sql);
-            perintah.setInt(1, id_ternak);
-            perintah.executeUpdate();
-            System.out.println("Data Berhasil Dihapus");
-        } 
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-    
-    /* TERNAK */
     
     /* UPT */        
     public void simpanUpt(Integer id_upt, String username, String password){
@@ -357,7 +258,7 @@ public class dataBase {
         }
     }
     
-    public void hapusUpt(Integer id_Upt, String username, String password){
+    public void hapusUpt(Integer id_Upt){
         try{
             String sql = "delete from upt where id_upt = ?";
             PreparedStatement perintah = connectionDB.prepareStatement(sql);
@@ -439,7 +340,7 @@ public class dataBase {
         }
     }
     
-    public void hapusPl(Integer id_pl, Integer id_upt, String nama, String username, String password){
+    public void hapusPl(Integer id_pl){
         try{
             String sql = "delete from pl where id_pl = ?";
             PreparedStatement perintah = connectionDB.prepareStatement(sql);
